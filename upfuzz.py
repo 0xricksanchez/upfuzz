@@ -497,14 +497,19 @@ def get_testing_recommendations(malicious_exts):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Enhanced file extension generator for bypass testing",
+        prog="upfuzz",
+        description="UpFuzz - The Ultimate File Upload Bypass Generator\nGenerates comprehensive lists of file extensions for bypassing upload filters.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
   %(prog)s --preset web --output extensions.txt
-  %(prog)s --preset xxe --show-content-types
+  %(prog)s --preset xxe --show-content-types  
   %(prog)s --preset php-comprehensive --output php_test.json
-  %(prog)s --malicious .php,.jsp --benign .jpg,.png --delimiters ",%00,."
+  %(prog)s --malicious .php,.jsp --benign .jpg,.png --delimiters ",%%00,."
+  %(prog)s --list-presets
+  %(prog)s --help
+
+For more information and usage examples, visit: https://github.com/yourusername/upfuzz
         """,
     )
 
@@ -521,7 +526,7 @@ Examples:
     parser.add_argument(
         "--delimiters",
         "-d",
-        help='Comma-separated list of delimiters (e.g., ",%00,.,%20")',
+        help='Comma-separated list of delimiters (e.g., ",%%00,.,%%20")',
     )
     parser.add_argument(
         "--preset",
