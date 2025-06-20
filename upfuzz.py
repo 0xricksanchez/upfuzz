@@ -32,6 +32,15 @@ def generate_extensions(
 
     extensions = set()
 
+    # Ensure all benign extensions are included as a baseline
+    for ext in benign_exts:
+        if not ext.startswith("."):
+            ext = f".{ext}"
+        extensions.add(ext)
+        # Include case variations for benign extensions
+        if case_variations:
+            extensions.update(generate_case_variations(ext))
+
     # Basic malicious extensions
     for mal_ext in malicious_exts:
         extensions.add(mal_ext)
